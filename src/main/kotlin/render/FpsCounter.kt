@@ -3,6 +3,7 @@ package org.noamm.render
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import kotlinx.coroutines.isActive
 import org.noamm.render.color.IColorPalette
 
 private const val NANOS_PER_SECOND = 1_000_000_000L
@@ -15,7 +16,7 @@ fun FpsCounter(theme: IColorPalette, modifier: Modifier = Modifier) {
         var frames = 0
         var start = withFrameNanos { it }
 
-        while (true) {
+        while (isActive) {
             val now = withFrameNanos { it }
             frames ++
             if (now - start < NANOS_PER_SECOND) continue
