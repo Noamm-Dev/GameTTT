@@ -14,20 +14,20 @@ import org.noamm.models.*
 import org.noamm.render.color.IColorPalette
 
 @Composable
-fun IGame.Grid(theme: IColorPalette) = Column(
+fun Grid(game: IGame, theme: IColorPalette) = Column(
     modifier = Modifier.drawWithCache {
-        val drawGridLines = gridLines(gridSize, theme)
+        val drawGridLines = gridLines(game.gridSize, theme)
 
         onDrawWithContent {
-            (status as? GameStatus.Won)?.let { drawWinHighlight(it.line, gridSize, theme) }
+            (game.status as? GameStatus.Won)?.let { drawWinHighlight(it.line, game.gridSize, theme) }
             drawContent()
             drawGridLines()
         }
     }
 ) {
-    for (row in 0 until gridSize) Row {
-        for (col in 0 until gridSize) Cell(this@Grid[row, col], theme) {
-            play(row, col)
+    for (row in 0 until game.gridSize) Row {
+        for (col in 0 until game.gridSize) Cell(game.get(row, col), theme) {
+            game.play(row, col)
         }
     }
 }

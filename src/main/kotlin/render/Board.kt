@@ -1,13 +1,8 @@
 package org.noamm.render
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,8 +17,8 @@ fun Board(game: IGame, theme: IColorPalette, onToggleTheme: () -> Unit) = Column
     horizontalAlignment = Alignment.CenterHorizontally
 ) {
     FpsCounter(theme, Modifier.align(Alignment.Start))
-    game.StatusText(theme)
-    game.Grid(theme)
+    StatusText(game, theme)
+    Grid(game, theme)
 
     Row(
         modifier = Modifier.padding(top = Dimensions.RESET_BUTTON_SPACING),
