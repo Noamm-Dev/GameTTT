@@ -4,7 +4,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.window.*
-import org.noamm.config.PropertiesConfig
+import org.noamm.config.Config
 import org.noamm.logic.Game
 import org.noamm.models.CellState
 import org.noamm.render.Board
@@ -20,7 +20,7 @@ fun main() = application {
         ),
         onCloseRequest = ::exitApplication
     ) {
-        val config = remember(::PropertiesConfig)
+        val config = remember(::Config)
         var theme by remember { mutableStateOf(config.theme) }
         var mode by remember { mutableStateOf(config.mode) }
         var aiSide by remember { mutableStateOf(config.aiSide) }
