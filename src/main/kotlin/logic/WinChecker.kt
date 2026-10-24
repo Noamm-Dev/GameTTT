@@ -3,10 +3,10 @@ package org.noamm.logic
 import org.noamm.models.*
 import kotlin.math.abs
 
-class CounterWinChecker(private val size: Int): IWinChecker {
-    // X adds 1 and O subtracts 1, so a line is won when its sum reaches +-size
-    private val rows = IntArray(size)
-    private val cols = IntArray(size)
+// X adds 1 and O removes 1 so a win is when its abs reaches gridSize
+class WinChecker(private val gridSize: Int): IWinChecker {
+    private val rows = IntArray(gridSize)
+    private val cols = IntArray(gridSize)
     private var diag = 0
     private var antiDiag = 0
 
@@ -15,9 +15,9 @@ class CounterWinChecker(private val size: Int): IWinChecker {
         rows[row] += delta
         cols[col] += delta
         if (row == col) diag += delta
-        if (row + col == size - 1) antiDiag += delta
+        if (row + col == gridSize - 1) antiDiag += delta
 
-        return when (size) {
+        return when (gridSize) {
             abs(rows[row]) -> WinLine.Horizontal(row)
             abs(cols[col]) -> WinLine.Vertical(col)
             abs(diag) -> WinLine.Diagonal

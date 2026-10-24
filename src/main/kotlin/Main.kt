@@ -6,6 +6,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.window.*
 import org.noamm.config.PropertiesConfig
 import org.noamm.logic.Game
+import org.noamm.models.CellState
 import org.noamm.render.Board
 
 fun main() = application {
@@ -21,10 +22,25 @@ fun main() = application {
     ) {
         val config = remember(::PropertiesConfig)
         var theme by remember { mutableStateOf(config.theme) }
+        var mode by remember { mutableStateOf(config.mode) }
+        var aiSide by remember { mutableStateOf(config.aiSide) }
 
-        Board(remember(::Game), theme.palette) {
-            config.theme = theme.next()
-            theme = config.theme
-        }
+        Board(
+            game = remember(mode, aiSide) { Game(mode, aiSide) },
+            theme = theme.palette,
+            themeName = theme.label,
+            onToggleTheme = {
+                config.theme = theme.next()
+                theme = config.theme
+            },
+            onToggleMode = {
+                config.mode = mode.next()
+                mode = config.mode
+            },
+            onToggleSide = {
+                config.aiSide = if (aiSide == CellState.X) CellState.O else CellState.X
+                aiSide = config.aiSide
+            }
+        )
     }
 }

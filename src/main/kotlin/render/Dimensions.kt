@@ -13,4 +13,7 @@ object Dimensions {
     val WINDOW_PADDING = 16.dp
     val RESET_BUTTON_SPACING = 16.dp
     val BUTTON_GAP = 8.dp
+    val BUTTON_PADDING = 8.dp
+    val MODE_BUTTON_WIDTH = 82.dp
+    val SIDE_BUTTON_WIDTH = 52.dp
 }

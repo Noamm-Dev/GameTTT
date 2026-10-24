@@ -14,4 +14,10 @@ sealed interface WinLine {
             AntiDiagonal -> i to gridSize - 1 - i
         }
     }
+
+    companion object {
+        fun ofGrid(gridSize: Int) = (0 until gridSize).flatMap {
+            listOf(Horizontal(it), Vertical(it))
+        } + Diagonal + AntiDiagonal
+    }
 }
