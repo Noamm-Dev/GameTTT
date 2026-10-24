@@ -3,18 +3,15 @@ package org.noamm.logic
 import androidx.compose.runtime.*
 import org.noamm.models.*
 
-class Game(
-    override val gridSize: Int = GRID_SIZE,
-    private val winChecker: IWinChecker = CounterWinChecker(gridSize)
-): IGame {
+class Game: IGame {
+    override val gridSize = 3
+    private val winChecker = CounterWinChecker(gridSize)
+
     private val cells = List(gridSize * gridSize) { CellState.EMPTY }.toMutableStateList()
     private var moves = 0
 
     override var currentPlayer by mutableStateOf(CellState.X)
-        private set
-
     override var status by mutableStateOf<GameStatus>(GameStatus.Playing)
-        private set
 
     override operator fun get(row: Int, col: Int) = cells[index(row, col)]
 
