@@ -1,6 +1,5 @@
 package org.noamm
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.DpSize
@@ -20,14 +19,12 @@ fun main() = application {
         ),
         onCloseRequest = ::exitApplication
     ) {
-        val config = remember { PropertiesConfig() }
+        val config = remember(::PropertiesConfig)
         var theme by remember { mutableStateOf(config.theme) }
 
-        MaterialTheme {
-            Board(remember { Game() }, theme.palette) {
-                theme = theme.next()
-                config.theme = theme
-            }
+        Board(remember(::Game), theme.palette) {
+            config.theme = theme.next()
+            theme = config.theme
         }
     }
 }
